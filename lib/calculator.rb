@@ -2,7 +2,7 @@ class Calculator
   
   def initialize(expression)
     @expression = expression
-   
+
   end
 
   def calculate
@@ -12,19 +12,19 @@ class Calculator
   calculate
   end
 
-  @expression.to_i
+  @expression.to_f
 
   end
 
   def parse(line)
       
-    line_matcher = /(\-\d+|\d+) (\d+) (\+|-|\*|\/)(?!\d)/
-
+    line_matcher = /(\-\d+|\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/
+# \d+\.?\d*
 
     raise "Invalid line: #{line}" unless line_matcher =~ line
 
     line.match(line_matcher)
-    result = ($1.to_i).send($3,$2.to_i)
+    result = ($1.to_f).send($3,$2.to_f)
     line.gsub!($1 + ' ' + $2 + ' ' + $3, result.to_s)
 
   end

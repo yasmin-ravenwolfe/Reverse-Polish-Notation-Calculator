@@ -2,14 +2,22 @@ require_relative 'calculator'
 
 class CommandLine
 
-  def initialize(input)
-    # if ARGV == []
-    #     puts "Nothing to calculate!"
-    #     exit false
-    #   end 
-    
-     calculator = Calculator.new(input)
+  def initialize
 
-     puts calculator.calculate
+    prompt_user
   end
+
+  def prompt_user
+    input = $stdin.gets.chomp     
+    if input == 'q'
+      puts "goodbye"
+      exit false
+    else
+    calculator = Calculator.new(input)
+
+    puts calculator.calculate
+    prompt_user
+  end
+  end
+
 end
