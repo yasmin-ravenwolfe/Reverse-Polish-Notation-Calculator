@@ -1,13 +1,17 @@
 class Calculator
-  def calculate(expression)
-  # expression.gsub
-  while expression.include?(' ')
-  parse(expression)
-
-  calculate(expression)
+  
+  def initialize(expression)
+    @expression = expression.join
   end
 
-  expression.to_i
+  def calculate
+  while @expression.include?(' ')
+  parse(@expression)
+
+  calculate
+  end
+
+  @expression.to_i
 
   end
 

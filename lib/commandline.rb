@@ -2,14 +2,13 @@ require_relative 'calculator'
 
 class CommandLine
 
-  def initialize(expression)
-    # if ARGV.length == 0 || ARGV.is_a?(String) == false
-    #     puts "Usage: #{ARGV[0]} [length]"
-    #     exit false
-    #   end 
-    e = expression.join
-     calculator = Calculator.new
+  def initialize(input)
+    if ARGV == []
+        puts "Nothing to calculate!"
+        exit false
+      end 
+     calculator = Calculator.new(input)
 
-     puts calculator.calculate(e)
+     puts calculator.calculate
   end
 end
