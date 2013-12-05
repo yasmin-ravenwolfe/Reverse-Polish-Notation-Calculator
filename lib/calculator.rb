@@ -1,7 +1,8 @@
 class Calculator
   
   def initialize(expression)
-    @expression = expression.join
+    @expression = expression
+   
   end
 
   def calculate

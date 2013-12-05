@@ -2,4 +2,7 @@
 
 require_relative '../lib/calculator'
 require_relative '../lib/commandline'
-CommandLine.new(ARGV)
+
+print "Please give me a statement to calculate!"
+input = gets
+CommandLine.new(input)
