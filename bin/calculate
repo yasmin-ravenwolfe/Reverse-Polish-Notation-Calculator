@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/calculator'
+require_relative '../lib/commandline'
+CommandLine.new(ARGV)
