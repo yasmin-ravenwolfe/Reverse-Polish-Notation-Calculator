@@ -1,5 +1,5 @@
 class Calculator
-  attr_reader :expression
+  attr_reader :expression, :operand_first, :operand_second, :operator
   
   def initialize(expression)
     @expression = expression
@@ -7,7 +7,10 @@ class Calculator
 
   def result
     return @expression.to_f unless @expression.include?(' ')
+    
     parse
+    
+    calculate
 
     result
   end
@@ -17,18 +20,17 @@ class Calculator
     line_matcher = /(\-\d+|\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/
 
     raise "Invalid line: #{line}" unless line_matcher =~ @expression
-  @match = @expression.match(line_matcher)
-  # @operand_first = @match[1]
-  # @operand_second = @match[2]
-  # @operator = @match[3]
-  calculate
-
+    
+    @expression.match(line_matcher)
+    @operand_first = $1
+    @operand_second = $2
+    @operator = $3
   end
 
   def calculate
-    result = (@match[1].to_f).send(@match[3],@match[2].to_f)
+    result = (@operand_first.to_f).send(@operator,@operand_second.to_f)
     
-    @expression.gsub!(@match[1] + ' ' + @match[2] + ' ' + @match[3], result.to_s)
+    @expression.gsub!(@operand_first + ' ' + @operand_second + ' ' + @operator, result.to_s)
   end
 end
 

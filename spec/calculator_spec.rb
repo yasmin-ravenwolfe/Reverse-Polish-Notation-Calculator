@@ -27,7 +27,13 @@ describe Calculator  do
   end
 
   describe "#parse" do
-    it "returns "
+    it "parses the expression and sets operand and operator attributes" do 
+      calculator.parse
+
+      expect(calculator.operand_first).to eq('1')
+      expect(calculator.operand_second).to eq('2')
+      expect(calculator.operator).to eq('+')
+    end
   end
 
 end
