@@ -1,37 +1,52 @@
 class Calculator
   attr_reader :expression, :operand_first, :operand_second, :operator
   
+  # Creates new Calculator instance. 
+  # Raises error if expression contains letters.
+  # 
   def initialize(expression)
-    @expression = expression
+    @expression = expression   
+
+    raise "Invalid line: #{@expression}"  if @expression.match(/[a-zA-z]/)
   end
 
-  def result
-    return @expression.to_f unless @expression.include?(' ')
+  # Returns the RPN result when there are no ' ' left.
+  # 
+  def result     
+    return @expression unless @expression.include?(' ')
     
     calculate
 
     result
   end
 
-# private
-  def parse
-    line_matcher = /(\-\d+|\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/
-
-    raise "Invalid line: #{@expression}" unless line_matcher =~ @expression
+private
+  # Performs the math operation determined by the operator onto the operands.
+  # Replaces expression just parsed with result.
+  # 
+  def calculate
+    parse
+    result = (@operand_first.to_f).send(@operator,@operand_second.to_f)
     
+    @expression.gsub!(@operand_first + ' ' + @operand_second + ' ' + @operator, result.to_s)
+  end
+
+  # Parses the expression.
+  # Sets matches as two operands and one operator.
+  # Accepts negative numbers and decimals.
+  # 
+  def parse
+
+    line_matcher = /^(\-?\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)$/
+
+    raise "Invalid line: #{@expression}" unless line_matcher =~ @expression 
+     
     @expression.match(line_matcher)
     @operand_first = $1
     @operand_second = $2
     @operator = $3
 
     
-  end
-
-  def calculate
-    parse
-    result = (@operand_first.to_f).send(@operator,@operand_second.to_f)
-    
-    @expression.gsub!(@operand_first + ' ' + @operand_second + ' ' + @operator, result.to_s)
   end
 end
 

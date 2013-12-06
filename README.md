@@ -19,45 +19,16 @@ Your Calculator should handle:
 
 3) Use “standard in” and “standard out” to accept and return data. Pressing “q” should quit the application.
 
+#### To run the app:
 
-Sample:
+To execute the program, from the program directory run:
 
-    > 5
+    calculator 
 
-    5
+The RPN expression is read from $stdin
+Enter RPN expression and press enter.
 
-    > 1
+    For example:
+    1 2 + 
 
-    1
 
-    > 2
-
-    2
-
-    > +
-
-    3
-
-    > 4
-
-    4
-
-    > *
-
-    12
-
-    > +
-
-    17
-
-    > 3
-
-    3
-
-    > -
-
-    14
-
-    > q
-
-    goodbye
