@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
+
 require_relative '../lib/calculator'
 
 describe Calculator  do 
@@ -36,4 +37,14 @@ describe Calculator  do
     end
   end
 
+  describe "#calculate" do 
+    it "return a new string value for expression attribute" do
+      calculator = Calculator.new("1 2 + 1 2 + +")
+
+      expect(calculator.calculate).to eq("3.0 3.0 +")
+    end
+  end
+
 end
+
+

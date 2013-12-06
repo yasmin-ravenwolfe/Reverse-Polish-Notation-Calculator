@@ -8,8 +8,6 @@ class Calculator
   def result
     return @expression.to_f unless @expression.include?(' ')
     
-    parse
-    
     calculate
 
     result
@@ -19,15 +17,18 @@ class Calculator
   def parse
     line_matcher = /(\-\d+|\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/
 
-    raise "Invalid line: #{line}" unless line_matcher =~ @expression
+    raise "Invalid line: #{@expression}" unless line_matcher =~ @expression
     
     @expression.match(line_matcher)
     @operand_first = $1
     @operand_second = $2
     @operator = $3
+
+    
   end
 
   def calculate
+    parse
     result = (@operand_first.to_f).send(@operator,@operand_second.to_f)
     
     @expression.gsub!(@operand_first + ' ' + @operand_second + ' ' + @operator, result.to_s)

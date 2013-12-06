@@ -1,22 +1,24 @@
 require_relative 'calculator'
 
 class CommandLine
+  attr_reader :input
 
   def initialize
-    prompt_user
+    run
   end
 
-  def prompt_user
-    input = $stdin.gets.chomp     
-    if input == 'q'
-      puts "goodbye"
-      exit false
-    else
-    calculator = Calculator.new(input)
+  def run
+    # input = $stdin.gets.chomp 
+    @input = 'q'    
+      if input == "q"
+        $stdout.puts "goodbye"
+        exit false
+      else
+      calculator = Calculator.new(input)
 
-    puts calculator.result
-    prompt_user
-  end
+      $stdout.puts calculator.result
+      run
+    end
   end
 
 end
