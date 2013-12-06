@@ -21,7 +21,8 @@ class CommandLine
       calculator = Calculator.new(input)
 
       $stdout.puts calculator.result
-      
+            input = $stdin.gets.chomp 
+      $stdout.puts calculator.second_result
       run
     end
   end

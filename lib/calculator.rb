@@ -20,17 +20,29 @@ class Calculator
     result
   end
 
+  def second_result
+    return @expression unless @expression.include?(' ')
+    
+    calculate_second
+
+    result
+  end
 private
   # Performs the math operation determined by the operator onto the operands.
   # Replaces expression just parsed with result.
   # 
   def calculate
     parse
-    result = (@operand_first.to_f).send(@operator,@operand_second.to_f)
+    @output_result = (@operand_first.to_f).send(@operator,@operand_second.to_f)
     
-    @expression.gsub!(@operand_first + ' ' + @operand_second + ' ' + @operator, result.to_s)
+    @expression.gsub!(@operand_first + ' ' + @operand_second + ' ' + @operator, @output_result.to_s)
   end
-
+  def calculate_second
+    parse_second
+    @output_result = (@operand_first.to_f).send(@operator,@operand_second.to_f)
+    
+    @expression.gsub!(@operand_first + ' ' + @operand_second + ' ' + @operator, @output_result.to_s)
+  end
   # Parses the expression.
   # Sets matches as two operands and one operator.
   # Accepts negative numbers and decimals.
@@ -43,6 +55,20 @@ private
      
     @expression.match(line_matcher)
     @operand_first = $1
+    @operand_second = $2
+    @operator = $3
+
+    
+  end
+
+    def parse_second
+
+    line_matcher = /^(\-?\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)$/
+
+    raise "Invalid line: #{@expression}" unless line_matcher =~ @expression 
+     
+    @expression.match(line_matcher)
+    @operand_first = @result
     @operand_second = $2
     @operator = $3
 
