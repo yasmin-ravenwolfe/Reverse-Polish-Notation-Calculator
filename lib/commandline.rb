@@ -3,7 +3,6 @@ require_relative 'calculator'
 class CommandLine
 
   def initialize
-
     prompt_user
   end
 
@@ -15,7 +14,7 @@ class CommandLine
     else
     calculator = Calculator.new(input)
 
-    puts calculator.calculate
+    puts calculator.result
     prompt_user
   end
   end
