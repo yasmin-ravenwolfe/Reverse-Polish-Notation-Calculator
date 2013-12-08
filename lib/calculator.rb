@@ -17,46 +17,15 @@ class Calculator
     if one_liner? == true
       Sanitizer.new(self).calculate
     else
-      Stack.new(self).add_array
-      calculate
+      Stack.new(self).calculate
+      # calculate
     end
 
   end
 
   def one_liner?
     true if /(\-?\d+\.?\d*) (\-?\d+|\d+\.?\d*) (\+|\-|\*|\/)(?!\d)/ =~ @expression 
-  end
-
-
-
-  def calculate
-    if @operators.empty?
-      @result = @operands.last
-    else
-      if @operands.count >= 2 && @operators.last == "-"
-      operand_first = @operands.pop
-      operand_second = @operands.pop
-      operator = @operators.pop
-
-      @result  = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)* (-1)
-
-      @operands.push(@result)
-    elsif @operands.count >= 2 && @operators.last != "-"
-         operand_first = @operands.pop
-      operand_second = @operands.pop
-      operator = @operators.pop
-
-      @result  = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
-
-      @operands.push(@result)
-
-      else
-        "Not enough operands for #{@operators} to perform"
-      end
-    end
-
-  end
-
+  end 
 
 end
 

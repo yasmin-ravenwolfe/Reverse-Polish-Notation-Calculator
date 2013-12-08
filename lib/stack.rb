@@ -22,6 +22,28 @@ class Stack
     end
   end
 
+  def calculate
+    add_array
+    if @operators.empty?
+      @result = @operands.last
+    else
+      if @operands.count >= 2 
+      operand_first = @operands.pop
+      operand_second = @operands.pop
+      operator = @operators.pop
+        if operator == '-'
+        @result  = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)* (-1)
+        else
+          @result  = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
+        end
+        @operands.push(@result)
+      else
+        "Not enough operands for #{@operators} #{@operands} to perform"
+      end
+    end
+
+  end
+
   def operator?(line)
   true if  line =~ /\+|\-|\*|\// 
   # false if line =~ /\d+/
