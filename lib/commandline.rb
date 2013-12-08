@@ -7,6 +7,8 @@ class CommandLine
   def initialize(input)
     @input = $stdin.gets.chomp 
     @calculator = Calculator.new(@input)
+    $stdout.puts @calculator.first_step
+
     run
   end
 
@@ -15,23 +17,21 @@ class CommandLine
   # Otherwise, a Calculator instance is called and result is output to console.
   # 
   def run
-    # input = $stdin.gets.chomp 
-      if @input == "q"
-        $stdout.puts "goodbye"
-        exit false
-      
-      else
-      $stdout.puts @calculator.first_step
+  # input = $stdin.gets.chomp 
+    input = $stdin.gets.chomp 
 
-      until @input == 'q'
-      # calculator = Calculator.new(input)
-      input = $stdin.gets.chomp 
-      $stdout.puts @calculator.next_step(input)
+    if input == "q"
+      $stdout.puts "goodbye"
+      exit false
+    else 
+  
 
-end
-      # $stdout.puts calculator.result
-      
-      
+    # calculator = Calculator.new(input)
+    
+    $stdout.puts @calculator.next_step(input)
+
+    run
+    # $stdout.puts calculator.result        
     end
   end
 

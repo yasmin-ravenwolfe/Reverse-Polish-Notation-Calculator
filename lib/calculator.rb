@@ -23,6 +23,7 @@ class Calculator
       add_array
       calculate
     end
+
     @result
   end
 
@@ -32,7 +33,7 @@ class Calculator
   end
 
   def one_liner?
-    true if /(\-?\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/ =~ @expression 
+    true if /(\-?\d+\.?\d*) (\-?\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/ =~ @expression 
   end
 
   def one_liner
@@ -101,8 +102,8 @@ def operator?(line)
   end
 
   def operand?(line)
-    true if /(\-?\d+\.?\d*)/ =~ line
+    true if /(\d+\.?\d*)/ =~ line
   end
 end
 
-# c = Calculator.new('5 1 2 + 4 * + 3 -')
+c = Calculator.new('5 1 2 + 4 * + 3 -')
