@@ -17,6 +17,7 @@ class Sanitizer
    def result
     parse
     @result = (@operand_one.to_f).send(@operator.to_sym,@operand_two.to_f)
+    @operands.pop
     @operands.push(@result)
     @expression.gsub!(@operand_one + ' ' + @operand_two + ' ' + @operator, @result.to_s)
   end
