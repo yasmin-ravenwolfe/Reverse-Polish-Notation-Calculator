@@ -4,4 +4,6 @@ require_relative '../lib/calculator'
 require_relative '../lib/commandline'
 
 
-CommandLine.new
+
+CommandLine.new($stdin, :exit_expression => 'q')
+

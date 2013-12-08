@@ -1,97 +1,102 @@
 class Calculator
-  attr_reader :expression, :operand_first, :operand_second, :operator
-  
-  # Creates new Calculator instance. 
-  # Raises error if expression contains letters.
-  # 
+  attr_accessor :expression, :operands, :operators, :result
+
   def initialize(expression)
-    @expression = expression   
-    @saved_results = []
-    raise "Invalid line: #{@expression}"  if @expression.match(/[a-zA-z]/)
-  end
+    @expression = expression
+    @operands = []
+    @operators = []
 
-  # Returns the RPN result when there are no ' ' left.
-  # 
-  def result     
-    if @expression.include?(' ')
+    first_step
     
-    calculate
-
-    result
-  else
-    @saved_results << @expression
-    @expression
   end
 
+  def first_step
+    if one_liner? == true
+      one_liner
+    else
+      add_array
+      calculate
+    end
+    @result
   end
 
-private
-  # Performs the math operation determined by the operator onto the operands.
-  # Replaces expression just parsed with result.
-  # 
-  def calculate
+  def more_input
+    first_step
+
+  end
+
+  def one_liner?
+    true if /(\-?\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/ =~ @expression 
+  end
+
+  def one_liner
+    while @expression.include?(' ')
+      calculate_one_liner
+      first_step
+    end
+
+  end
+
+  def calculate_one_liner
     parse
-    result = (@operand_first.to_f).send(@operator,@operand_second.to_f)
-    
-    @expression.gsub!(@operand_first + ' ' + @operand_second + ' ' + @operator, result.to_s)
+    @result = (@operand_one.to_f).send(@operator,@operand_two.to_f)
+    @operands.push(@result)
+    @expression.gsub!(@operand_one + ' ' + @operand_two + ' ' + @operator, result.to_s)
   end
 
-  # Parses the expression.
-  # Sets matches as two operands and one operator.
-  # Accepts negative numbers and decimals.
-  # 
+
+
   def parse
+     line_matcher = /(\-?\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/
 
-    line_matcher = /^(\-?\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)$/
-    next_line_matcher = /^(\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)$/
-
-    # raise "Invalid line: #{@expression}" unless line_matcher =~ @expression 
-
-    # if line_matcher =~ @expression
-     
       @expression.match(line_matcher)
-      @operand_first = $1
-      @operand_second = $2
+      @operand_one = $1
+      @operand_two = $2
       @operator = $3
-    # elsif next_line_matcher =~ @expression
-    #   @operand_first = @saved_results.first.to_f
-    #   @operand_second = $1
-    #   @operator = $2
-    # else
-    #   "not a valid line"
-    # end
+  end
+  
+  def add_array
+   tokens = @expression.split(' ')
 
+   tokens.each do |token|
+      if operator?(token)
+        @operators << token
+      elsif operand?(token)
+        @operands << token
+      else
+        "not a valid expression"
+      end
+    end
+  end
+
+  def calculate
+    if @operators.empty?
+      @result = @operands.last
+    else
+      if @operands.count >= 2
+      operand_first = @operands.pop
+      operand_second = @operands.pop
+      operator = @operator.pop
+
+      @result  = (operand_first.to_f).send(operator,operand_second.to_f)
+
+      @operands.push(@result)
+
+      else
+        "Not enough operators #{@operators} to perform"
+      end
+    end
+
+  end
+
+def operator?(line)
+    true if /(\+|-|\*|\/)/ =~ line
     
+  end
+
+  def operand?(line)
+    true if /(\-?\d+\.?\d*)/ =~ line
   end
 end
 
-
-
-
-# class Calculator
-  
-#   def initialize(expression)
-#     @expression = expression
-#   end
-
-#   def calculate
-#     return @expression.to_f unless @expression.include?(' ')
-#     parse(@expression)
-
-#     calculate
-#   end
-
-# private
-#   def parse(line)
-      
-#     line_matcher = /(\-\d+|\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)/
-
-#     raise "Invalid line: #{line}" unless line_matcher =~ line
-
-#     line.match(line_matcher)
-#     result = ($1.to_f).send($3,$2.to_f)
-#     line.gsub!($1 + ' ' + $2 + ' ' + $3, result.to_s)
-
-#   end
-# end
-
+# c = Calculator.new('5 1 2 + 4 * + 3 -')
