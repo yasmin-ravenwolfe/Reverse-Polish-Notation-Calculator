@@ -12,10 +12,10 @@ class Stack
    tokens = @expression.split(' ')
 
    tokens.each do |token|
-      if operator?(token)
-        @operators << token
-      elsif operand?(token)
+      if operand?(token)
         @operands << token
+      elsif operator?(token)
+        @operators << token
       else
         "not a valid expression"
       end
@@ -23,7 +23,8 @@ class Stack
   end
 
   def operator?(line)
-  true if /(\+|\-|\*|\/)/ =~ line 
+  true if  line =~ /\+|\-|\*|\// 
+  # false if line =~ /\d+/
   end
 
   def operand?(line)
