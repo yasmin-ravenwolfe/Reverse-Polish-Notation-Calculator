@@ -23,21 +23,31 @@ class Calculator
   end
 
   def calculate
-    while @operands.size > 0 && @operators.size > 1
     @operand_two = @operands.pop
     @operand_one = @operands.pop
-    @operator = @operators.pop
+    @operator = @operators.shift
+    # while @operands.size > 0 && @operators.size > 1
+
 
     result = (@operand_one.to_f).send(@operator,@operand_two.to_f)
-    @operands << result
-    calculate
+    # @operands.unshift(result)
+
+    
+    result
   end
-  result
-  
   end
+# # "(1  2) + (3 4) + *"
+# 1 2 3 4 
+# + + *
+# 1 + 2
+# 3, 3, 4
+# + *
+# 3 + 4
+# 3, 7 
+# *
 
   def next_calculate
-    
+
   end
 
   def operator?(line)
@@ -50,3 +60,5 @@ class Calculator
   end
 
 end
+
+c = Calculator.new("1 2 + 3 4 +")
