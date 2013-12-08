@@ -3,48 +3,60 @@ require 'bundler/setup'
 require 'rspec'
 
 require_relative '../lib/calculator'
+require_relative '../lib/sanitizer'
 
-describe Calculator  do 
-  let(:calculator) {Calculator.new("1 2 +")
-}
+module RPN
+  describe Calculator  do 
+    let(:calculator) {Calculator.new}
 
-  before(:each) do
-    Calculator.send(:public, *Calculator.private_instance_methods)
-  end
-    
-  describe ".initialize" do 
-    it "creates a new calculate and sets the expression attribute" do
+    before(:each) do
+      Calculator.send(:public, *Calculator.protected_instance_methods)
+    end
+      
+    describe ".initialize" do 
+      it "creates a new calculate and sets the operands and operators attributes to empty array" do
 
-      expect(calculator.expression).to eq("1 2 +") 
-    end      
-  end
+        expect(calculator.operands).to eq([]) 
+        expect(calculator.operators).to eq([]) 
 
-  describe "#result" do 
-    it "returns the result of performing calculation" do 
+      end      
+    end
 
-      expect(calculator.result).to eq(3)
+    describe "#classify" do 
 
+      context "Calculator::Sanitizer? is true" do 
+        it "creates a new Sanitizer instance and calls calculate method it" do
+          
+          expect(calculator.classify("1 2 +")).to eq("3.0")
+        end
+      end
+
+      context "Calculator::Sanitizer? is not true" do
+        it "creates a new Stack instance and calls calculate method on it" do     
+
+          expect(calculator.classify("1")).to eq("1")
+        end
+      end
+    end
+
+    describe "#sanitizer?" do 
+      context "expression matches one-line RPN format" do
+        it "returns true" do
+          calculator.expression = "1 2 +"
+
+          expect(calculator.sanitizer?).to eq(true)
+        end
+      end
+
+      context "expression does not match one-line RPN format but is valid" do 
+        it "return nil" do 
+
+          calculator.expression = "1"
+          expect(calculator.sanitizer?).to eq(nil)
+        end
+      end
     end
   end
-
-  describe "#parse" do
-    it "parses the expression and sets operand and operator attributes" do 
-      calculator.parse
-
-      expect(calculator.operand_first).to eq('1')
-      expect(calculator.operand_second).to eq('2')
-      expect(calculator.operator).to eq('+')
-    end
-  end
-
-  describe "#calculate" do 
-    it "return a new string value for expression attribute" do
-      calculator = Calculator.new("1 2 + 1 2 + +")
-
-      expect(calculator.calculate).to eq("3.0 3.0 +")
-    end
-  end
-
 end
 
 

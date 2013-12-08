@@ -1,57 +1,115 @@
-class Stack
+module RPN
+ 
+  # Calculates RPN value for expressions from multiple lines of user input.
+  # 
+  class Stack
+  
+    attr_reader :expression, :operands, :operators, :operand_first, :operand_second, :operator
 
-  def initialize(calculator)
-    @expression = calculator.expression
-    @operators = calculator.operators
-    @operands = calculator.operands
-    
-  end
+    ## Sets attributes equal to those of the Calculator instance it was created through.
+    # 
+    def initialize(calculator)
+      @expression = calculator.expression
+      @operators = calculator.operators
+      @operands = calculator.operands
+      
+    end
 
+    # Splits expression into an array.
+    # Pushes each elemen into operands or operators array.
+    # 
+    def add_to_stack
+     tokens = @expression.split(' ')
 
-  def add_array
-   tokens = @expression.split(' ')
-
-   tokens.each do |token|
-      if operand?(token)
-        @operands << token
-      elsif operator?(token)
-        @operators << token
-      else
-        "not a valid expression"
+     tokens.each do |token|
+        if operand?(token)
+          @operands << token
+        elsif operator?(token)
+          @operators << token
+        else
+          "Not a valid calculation"
+        end
       end
     end
-  end
 
-  def calculate
-    add_array
-    if @operators.empty?
-      @result = @operands.last
-    elsif @operands.count >= 2 
-      normal_calculation
-    else
-      @operators.pop
-      "Not enough operands for #{@operators} #{@operands} to perform"
-    end
-  end
-
-  def normal_calculation
-    operand_first = @operands.pop
-    operand_second = @operands.pop
-    operator = @operators.pop
-    @result  = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
-      if operator == '-'
-        @operands.push(@result * (-1))
+    # Returns RPN calculation result when there are enough operands and operators.
+    # Returns last operand when there are no operators.
+    # Returns result when there is an operator and at least two operands.
+    # Returns an error when there is an operator but less than two operands.
+    # 
+    def calculate
+      add_to_stack
+      if @operators.empty?
+        @operands.last
+      elsif @operands.count >= 2 
+        normal_calculation
+        @operands.last
       else
-        @operands.push(@result)
+        @operators.pop
+        "Not enough operands to perform calculation. (Operands: #{@operands})"
       end
-  end
+    end
 
-  def operator?(line)
-  true if line =~ /\+|\-|\*|\// 
-  # false if line =~ /\d+/
-  end
+    # Performs arithmetic operation determined by operator.
+    # 
+    def normal_calculation
+      set_values
 
-  def operand?(line)
-    true if line =~ /(\-?\d+\.?\d*)/ 
+      if division?
+        division
+      elsif subtraction?
+        subtraction
+      else 
+      addition_and_multiplication
+      end
+    end
+
+    # Sets operand and operator values for RPN calculation.
+    # 
+    def set_values
+      @operand_first = @operands.pop
+      @operand_second = @operands.pop
+      @operator = @operators.pop
+    end
+
+    # For division operations.
+    # 
+    def division?
+      @operator == "/"
+    end
+
+    def division
+      result = (@operand_second.to_f).send(@operator.to_sym,@operand_first.to_f)
+      @operands.push(result)
+    end 
+
+    # For subtraction operations.
+    # 
+    def subtraction?
+      @operator == "-"
+    end
+
+    def subtraction
+      result = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
+      @operands.push(result * (-1))
+    end
+
+    # For addition and multiplicaton operations.
+    # 
+    def addition_and_multiplication
+      result = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
+      @operands.push(result)
+    end
+
+    # Returns true is token is an operator.
+    # 
+    def operator?(token)
+      true if token =~ /\+|\-|\*|\// 
+    end
+    # Returns true is token is an operand.
+    # 
+    def operand?(token)
+      true if token =~ /(\-?\d+\.?\d*)/ 
+    end
   end
 end
