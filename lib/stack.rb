@@ -26,31 +26,32 @@ class Stack
     add_array
     if @operators.empty?
       @result = @operands.last
+    elsif @operands.count >= 2 
+      normal_calculation
     else
-      if @operands.count >= 2 
-      operand_first = @operands.pop
-      operand_second = @operands.pop
-      operator = @operators.pop
-        if operator == '-'
-        @result  = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)* (-1)
-        else
-          @result  = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
-        end
-        @operands.push(@result)
-      else
-        @operators.pop
-        "Not enough operands for #{@operators} #{@operands} to perform"
-      end
+      @operators.pop
+      "Not enough operands for #{@operators} #{@operands} to perform"
     end
+  end
 
+  def normal_calculation
+    operand_first = @operands.pop
+    operand_second = @operands.pop
+    operator = @operators.pop
+    @result  = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
+      if operator == '-'
+        @operands.push(@result * (-1))
+      else
+        @operands.push(@result)
+      end
   end
 
   def operator?(line)
-  true if  line =~ /\+|\-|\*|\// 
+  true if line =~ /\+|\-|\*|\// 
   # false if line =~ /\d+/
   end
 
   def operand?(line)
-    true if /(\-?\d+\.?\d*)/ =~ line
+    true if line =~ /(\-?\d+\.?\d*)/ 
   end
 end
