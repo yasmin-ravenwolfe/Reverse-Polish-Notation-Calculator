@@ -1,3 +1,5 @@
+# require 'pry'
+
 class Calculator
   attr_accessor :expression, :operands, :operators, :result
 
@@ -8,6 +10,10 @@ class Calculator
 
     first_step
     
+  end
+  def next_step(input)
+    @expression = input
+    first_step
   end
 
   def first_step
@@ -76,7 +82,7 @@ class Calculator
       if @operands.count >= 2
       operand_first = @operands.pop
       operand_second = @operands.pop
-      operator = @operator.pop
+      operator = @operators.pop
 
       @result  = (operand_first.to_f).send(operator,operand_second.to_f)
 
@@ -90,7 +96,7 @@ class Calculator
   end
 
 def operator?(line)
-    true if /(\+|-|\*|\/)/ =~ line
+    true if /(\+|\-|\*|\/)/ =~ line
     
   end
 

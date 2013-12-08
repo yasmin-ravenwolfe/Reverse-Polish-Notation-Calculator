@@ -4,8 +4,9 @@ class CommandLine
 
   # When a CommandLine instance is created, the run method is immediately called.
   # 
-  def initialize(expression, options = {})
-    @expression = $stdin.gets.chomp 
+  def initialize(input)
+    @input = $stdin.gets.chomp 
+    @calculator = Calculator.new(@input)
     run
   end
 
@@ -14,16 +15,25 @@ class CommandLine
   # Otherwise, a Calculator instance is called and result is output to console.
   # 
   def run
-      if @expression == "q"
+    # input = $stdin.gets.chomp 
+      if @input == "q"
         $stdout.puts "goodbye"
         exit false
       
       else
-      calculator = Calculator.new(@expression)
-      $stdout.puts calculator.first_step
+      $stdout.puts @calculator.first_step
+
+      until @input == 'q'
+      # calculator = Calculator.new(input)
+      input = $stdin.gets.chomp 
+      $stdout.puts @calculator.next_step(input)
+
+end
       # $stdout.puts calculator.result
       
       
     end
   end
+
+
 end
