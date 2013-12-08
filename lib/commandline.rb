@@ -16,13 +16,14 @@ module RPN
     # Otherwise, Calculator::classify is called and and result output to console.
     # 
     def run
+      $stderr.print '> '
       @input = $stdin.gets.chomp 
 
       if @input == 'q'
         $stdout.puts "goodbye"
         exit false
       else
-      raise "Error: #{@input} is not a valid RPN expression" if @input =~ /[^\+|\-|\*|\/|(\-?\d+\.?\d*\s)]/ 
+      raise "Error: #{@input} is not a valid RPN expression" if @input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
 
       $stdout.puts @calculator.classify(@input)
 
