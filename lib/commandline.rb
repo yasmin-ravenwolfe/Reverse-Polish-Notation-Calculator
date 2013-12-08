@@ -7,9 +7,13 @@ class CommandLine
   def initialize(input)
     @input = $stdin.gets.chomp 
     @calculator = Calculator.new(@input)
-    $stdout.puts @calculator.first_step
-
-    run
+      if @input == 'q'
+        $stdout.puts "goodbye"
+        exit false
+      else
+      $stdout.puts @calculator.first_step
+      run
+      end
   end
 
   # Starts program and allows for user input.
