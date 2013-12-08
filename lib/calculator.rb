@@ -47,19 +47,19 @@ private
 
     # raise "Invalid line: #{@expression}" unless line_matcher =~ @expression 
 
-    if line_matcher =~ @expression
+    # if line_matcher =~ @expression
      
       @expression.match(line_matcher)
       @operand_first = $1
       @operand_second = $2
       @operator = $3
-    elsif next_line_matcher =~ @expression
-      @operand_first = @saved_results.first.to_f
-      @operand_second = $1
-      @operator = $2
-    else
-      "not a valid line"
-    end
+    # elsif next_line_matcher =~ @expression
+    #   @operand_first = @saved_results.first.to_f
+    #   @operand_second = $1
+    #   @operator = $2
+    # else
+    #   "not a valid line"
+    # end
 
     
   end
