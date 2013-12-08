@@ -13,6 +13,7 @@ class Calculator
 
 
   def first_step(input)
+    raise "error" if /[^\+|\-|\*|\/|\-?\d+\.?\d*\s]/ =~ input 
     @expression = input
     if one_liner? == true
       Sanitizer.new(self).calculate

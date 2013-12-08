@@ -38,6 +38,7 @@ class Stack
         end
         @operands.push(@result)
       else
+        @operators.pop
         "Not enough operands for #{@operators} #{@operands} to perform"
       end
     end
