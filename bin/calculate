@@ -6,6 +6,7 @@ require_relative '../lib/commandline'
 
 
 # CommandLine.new($stdin, :exit_expression => 'q')
-CommandLine.new($stdin)
+# CommandLine.new($stdin)
+CommandLine.new
 
 
