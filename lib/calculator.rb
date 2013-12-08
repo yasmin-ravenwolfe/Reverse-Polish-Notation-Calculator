@@ -6,18 +6,23 @@ class Calculator
   # 
   def initialize(expression)
     @expression = expression   
-
+    @saved_results = []
     raise "Invalid line: #{@expression}"  if @expression.match(/[a-zA-z]/)
   end
 
   # Returns the RPN result when there are no ' ' left.
   # 
   def result     
-    return @expression unless @expression.include?(' ')
+    if @expression.include?(' ')
     
     calculate
 
     result
+  else
+    @saved_results << @expression
+    @expression
+  end
+
   end
 
 private
@@ -38,13 +43,23 @@ private
   def parse
 
     line_matcher = /^(\-?\d+\.?\d*) (\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)$/
+    next_line_matcher = /^(\-\d+|\d+\.?\d*) (\+|-|\*|\/)(?!\d)$/
 
-    raise "Invalid line: #{@expression}" unless line_matcher =~ @expression 
+    # raise "Invalid line: #{@expression}" unless line_matcher =~ @expression 
+
+    if line_matcher =~ @expression
      
-    @expression.match(line_matcher)
-    @operand_first = $1
-    @operand_second = $2
-    @operator = $3
+      @expression.match(line_matcher)
+      @operand_first = $1
+      @operand_second = $2
+      @operator = $3
+    elsif next_line_matcher =~ @expression
+      @operand_first = @saved_results.first.to_f
+      @operand_second = $1
+      @operator = $2
+    else
+      "not a valid line"
+    end
 
     
   end
