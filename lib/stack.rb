@@ -14,7 +14,7 @@ module RPN
       @operands = calculator.operands
       
     end
-    
+
     # Returns RPN calculation result when there are enough operands and operators.
     # Returns last operand when there are no operators.
     # Returns result when there is an operator and at least two operands.
