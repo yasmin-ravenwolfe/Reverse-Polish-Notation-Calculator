@@ -13,7 +13,7 @@ attr_reader :calculator
 
     # Runs program by using user input to do RPN calculations.
     # If user input is 'q', the program exits.
-    # Otherwise, Calculator::classify is called and and result output to console.
+    # Otherwise, Calculator#classify is called and and result output to console.
     # 
     def run
       $stderr.print '> '

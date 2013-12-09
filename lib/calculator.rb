@@ -33,7 +33,7 @@ module RPN
     # If it doesn't match, the data needs to be calculated through use of the @operands and @operators arrays.
     # 
     def one_liner?
-      true if /(\-?\d+\.?\d*) (\-?\d+|\d+\.?\d*) (\+|\-|\*|\/)(?!\d)/ =~ @expression 
+      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ @expression 
     end 
   end
 end

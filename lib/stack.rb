@@ -109,7 +109,7 @@ module RPN
     # Returns true is token is an operand.
     # 
     def operand?(token)
-      true if token =~ /(\-?\d+\.?\d*)/ 
+      true if token =~ /(\-*\d+\.*\d*)/ 
     end
   end
 end

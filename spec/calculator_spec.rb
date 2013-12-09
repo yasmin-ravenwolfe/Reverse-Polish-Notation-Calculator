@@ -24,14 +24,14 @@ module RPN
 
     describe "#classify" do 
 
-      context "Calculator::one_liner? is true" do 
+      context "Calculator#one_liner? is true" do 
         it "creates a new OneLiner instance and calls calculate method it" do
           
           expect(calculator.classify("1 2 +")).to eq("3.0")
         end
       end
 
-      context "Calculator::one_liner? is not true" do
+      context "Calculator#one_liner? is not true" do
         it "creates a new Stack instance and calls calculate method on it" do     
 
           expect(calculator.classify("1")).to eq("1")

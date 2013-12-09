@@ -38,7 +38,7 @@ module RPN
     # Matches for numbers that are positive or negative and can be a decimal.
     # Matches for +, -, *, / operators.
     def parse
-       line_matcher = /(\-?\d+\.?\d*) (\-?\d+|\d+\.?\d*) (\+|\-|\*|\/)(?!\d)/
+       line_matcher = /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/
 
         @expression.match(line_matcher)
         @operand_one = $1
