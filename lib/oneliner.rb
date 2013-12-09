@@ -12,14 +12,17 @@ module RPN
       @operators = calculator.operators
     end
 
+   
     # Calculates RPN value until all ' ' have been eliminated.
     # Returns result.
     # 
     def calculate
-      return @expression unless @expression.include?(' ')
+      return @operands.last unless @expression.include?(' ')
         result
         calculate
     end
+
+    protected
 
     # Calculates new result by sending operator as a method on operands.
     # Returns the new expression as a string.
@@ -34,9 +37,10 @@ module RPN
       @expression.gsub!(@operand_one + ' ' + @operand_two + ' ' + @operator, result.to_s)
     end
 
-    # Parses expression to sets operand and operator values.
+    # Parses expression to set operand and operator values.
     # Matches for numbers that are positive or negative and can be a decimal.
     # Matches for +, -, *, / operators.
+    # 
     def parse
        line_matcher = /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/
 

@@ -30,16 +30,16 @@ module RPN
       it "returns the RPN calculated value of the expression" do 
         calculator.expression = "1 2 +"
 
-        expect(oneliner.calculate).to eq("3.0")
+        expect(oneliner.calculate).to eq(3.0)
       end
     end
 
     describe "#result" do 
-      it "returns the new expression and pushes reult to operands array" do 
+      it "returns the new expression and pushes result to operands array" do 
         calculator.expression = "1 2 + 4 -"
 
         expect(oneliner.result).to eq("3.0 4 -")
-        expect(oneliner.operands).to eq([3.0])
+        expect(oneliner.operands.last).to eq(3.0)
       end
     end
 
@@ -49,7 +49,6 @@ module RPN
         calculator.expression = "1 2 +"
         
         expect(oneliner.parse).to eq("+")
-
       end
     end
   end

@@ -2,7 +2,7 @@ require_relative 'oneliner'
 require_relative 'stack'
 
 module RPN
-  # Determines how to calculate user input.
+  # Determines whether to calculate user input through the OneLiner or Stack classes.
   # 
   class Calculator
     attr_accessor :expression, :operands, :operators, :result
@@ -15,8 +15,8 @@ module RPN
     end
 
     # Calculates RPN value depending on type of input. 
-    # If input matches one_liner? format, a new OneLiner instance is created and result is returned.
-    # If input does not match one_liner? format, but is valid, a new Stack instance is created and result is returned.
+    # If input passes one_liner? test, a new OneLiner instance is created and result is returned.
+    # If input does not pass one_liner? test, but is valid, a new Stack instance is created and result is returned.
     # 
     def classify(input)
       @expression = input

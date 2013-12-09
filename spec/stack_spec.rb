@@ -9,7 +9,10 @@ module RPN
   describe Stack do
     let(:calculator) {Calculator.new}
     let(:stack) {Stack.new(calculator)}
-
+    
+    before(:each) do
+      Stack.send(:public, *Stack.protected_instance_methods)
+    end
 
     describe ".initialize" do 
       it "sets expression, operands, and operators values equal to calculator" do 
@@ -33,7 +36,7 @@ module RPN
 
     describe "#calculate" do 
       context "operators array is empty" do 
-        it "returns the last operands" do 
+        it "returns the previous operand" do 
           calculator.expression = "1 2"
 
           expect(stack.calculate).to eq("2")
@@ -103,7 +106,7 @@ module RPN
     end
 
     describe "#divison?" do 
-      it "returns true if the operation is divion" do 
+      it "returns true if the operation is division" do 
         calculator.expression = "1 2 /"
         stack.add_to_stack
         stack.set_values
@@ -113,7 +116,7 @@ module RPN
     end
 
     describe "#division" do 
-      it "calculates the RPN value for a division calculation" do 
+      it "calculates the RPN value for a division operation" do 
 
         calculator.expression = "1 2 /"
         stack.add_to_stack
@@ -125,8 +128,8 @@ module RPN
       end
     end
 
-    describe "#divison?" do 
-      it "returns true if the operation is divion" do 
+    describe "#subtraction?" do 
+      it "returns true if the operation is subtraction" do 
         calculator.expression = "1 2 -"
         stack.add_to_stack
         stack.set_values
@@ -135,7 +138,7 @@ module RPN
       end
     end
     describe "#subtraction" do 
-      it "calculates the RPN value for a subtraction calculation" do 
+      it "calculates the RPN value for a subtraction operation" do 
 
         calculator.expression = "1 2 -"
         stack.add_to_stack
@@ -146,7 +149,7 @@ module RPN
     end
 
     describe "#addition_and_multiplication" do 
-      it "calculates the RPN value for a addition or multiplication calculation" do 
+      it "calculates the RPN value for addition and multiplication operations" do 
 
         calculator.expression = "1 2 +"
         stack.add_to_stack
@@ -157,14 +160,14 @@ module RPN
     end
 
     describe "#operator?" do 
-      it "returns true if it is an operator" do 
+      it "returns true if token is an operator" do 
 
         expect(stack.operator?("+")).to eq(true)
       end
     end
 
     describe "#operand?" do 
-      it "returns true if it is an operand" do 
+      it "returns true if token is an operand" do 
 
         expect(stack.operand?("-1")).to eq(true)
       end

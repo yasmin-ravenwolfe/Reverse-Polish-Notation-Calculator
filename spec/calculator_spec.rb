@@ -14,7 +14,7 @@ module RPN
     end
       
     describe ".initialize" do 
-      it "creates a new calculate and sets the operands and operators attributes to empty array" do
+      it "creates a new calculate and sets the operands and operators attributes to empty arrays" do
 
         expect(calculator.operands).to eq([]) 
         expect(calculator.operators).to eq([]) 
@@ -25,9 +25,9 @@ module RPN
     describe "#classify" do 
 
       context "Calculator#one_liner? is true" do 
-        it "creates a new OneLiner instance and calls calculate method it" do
+        it "creates a new OneLiner instance and returns result of OneLiner#calculate" do
           
-          expect(calculator.classify("1 2 +")).to eq("3.0")
+          expect(calculator.classify("1 2 +")).to eq(3.0)
         end
       end
 
@@ -58,5 +58,3 @@ module RPN
     end
   end
 end
-
-

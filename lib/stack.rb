@@ -1,12 +1,12 @@
 module RPN
  
-  # Calculates RPN value for expressions from multiple lines of user input.
+  # Calculates RPN value for multiple lines of user input.
   # 
   class Stack
   
     attr_reader :expression, :operands, :operators, :operand_first, :operand_second, :operator
 
-    ## Sets attributes equal to those of the Calculator instance it was created through.
+    # Sets attributes equal to those of the Calculator instance it was created through.
     # 
     def initialize(calculator)
       @expression = calculator.expression
@@ -14,24 +14,7 @@ module RPN
       @operands = calculator.operands
       
     end
-
-    # Splits expression into an array.
-    # Pushes each elemen into operands or operators array.
-    # 
-    def add_to_stack
-     tokens = @expression.split(' ')
-
-     tokens.each do |token|
-        if operand?(token)
-          @operands << token
-        elsif operator?(token)
-          @operators << token
-        else
-          "Not a valid calculation"
-        end
-      end
-    end
-
+    
     # Returns RPN calculation result when there are enough operands and operators.
     # Returns last operand when there are no operators.
     # Returns result when there is an operator and at least two operands.
@@ -49,6 +32,26 @@ module RPN
         "Not enough operands to perform calculation. (Operands: #{@operands})"
       end
     end
+
+    protected
+
+    # Splits expression into an array.
+    # Pushes each element into operands or operators array.
+    # 
+    def add_to_stack
+     tokens = @expression.split(' ')
+
+     tokens.each do |token|
+        if operand?(token)
+          @operands << token
+        elsif operator?(token)
+          @operators << token
+        else
+          "Not a valid calculation"
+        end
+      end
+    end
+
 
     # Performs arithmetic operation determined by operator.
     # 
