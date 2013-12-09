@@ -2,7 +2,7 @@ require_relative 'calculator'
 
 module RPN
   class CommandLine
-
+attr_reader :calculator
     # When a CommandLine instance is created, a new Calculator instance is created.
     # The run method is immediately called.
     # 

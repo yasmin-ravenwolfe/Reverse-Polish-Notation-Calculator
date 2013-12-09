@@ -19,16 +19,57 @@ Your Calculator should handle:
 
 3) Use “standard in” and “standard out” to accept and return data. Pressing “q” should quit the application.
 
+
 #### To run the app:
 
 To execute the program, from the program directory run:
 
-    calculator 
+    calculate
 
-The RPN expression is read from $stdin
-Enter RPN expression and press enter.
+The RPN expression is read from what the user inputs on the command line ($stdin). 
 
-    For example:
-    1 2 + 
+The expression can be entered in the following two ways:
+
+  The whole expression on one line:
+> 1 2 + -1 *
+  
+  The expression broken up on mutiple lines:
+> 1
+1
+> 2
+2
+> +
+3.0
+> -1
+-1
+> *
+-3.0
+
+To exit the program, type 'q':  
+> q
+goodbye
+
+###Testing:
+Testing was done using RSpec. Each class has a corresponding test file in the spec folder.
+
+Run bundle install to install the RSpec testing gem.
+
+To run an individual test: rspec spec/"filename".rb
+
+To run all tests:
+Testing was done using RSpec. Each class has a corresponding test file in the spec folder.
+
+Run bundle install to install the RSpec testing gem.
+
+To run an individual test: rspec spec/"filename".rb
+
+To run all tests: rspec
+
+
+###Design
+
+This app has four classes: Calculator, CommandLine, Sanitizer, Stack. Each is an abstraction of and performs the duties of the object it is named for. 
+
+1. 
 
 
