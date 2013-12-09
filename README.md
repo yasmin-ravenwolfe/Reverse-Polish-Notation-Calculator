@@ -36,15 +36,25 @@ The expression can be entered in the following two ways:
 > 1 2 + -1 *
   
   The expression broken up on multiple lines. Values not calculated persist for the next operation:
+  
 > 1
+
 1
+
 > 2
+
 2
+
 > +
+
 3.0
+
 > -1
+
 -1
+
 > *
+
 -3.0
 
 
