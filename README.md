@@ -33,7 +33,7 @@ The program accepts positive and negative numbers, integers and floats.
 The expression can be entered in the following two ways:
 
   The whole expression on one line:
-> 1 2 + -1 *
+      > 1 2 + -1 *
   
   The expression broken up on multiple lines. Values not calculated persist for the next operation:
 
@@ -59,8 +59,8 @@ The expression can be entered in the following two ways:
 
 
 To exit the program, type 'q':  
-> q
-goodbye
+      > q
+      goodbye
 
 ###Testing:
 
@@ -68,9 +68,11 @@ Testing was done using RSpec. Each class has a corresponding test file in the sp
 
 Run bundle install to install the RSpec testing gem.
 
-To run an individual test: rspec spec/"filename".rb
+To run an individual test: 
+      rspec spec/<filename>.rb
 
-To run all tests: rspec
+To run all tests: 
+      rspec
 
 
 ###Design
