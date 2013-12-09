@@ -31,7 +31,7 @@ module RPN
     # 
     def result
       parse
-      raise "Can't divide by zero!" if @operand_two == "0"
+      raise "Cannot divide #{@operand_one} by zero!" if @operand_two == "0"
       result = (@operand_one.to_f).send(@operator.to_sym,@operand_two.to_f)
       @operands.pop
       @operands.push(result)

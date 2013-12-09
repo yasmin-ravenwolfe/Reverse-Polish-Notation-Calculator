@@ -82,7 +82,7 @@ module RPN
     end
 
     def division
-      raise "Can't divide by zero!" if @operand_first == "0"
+      raise "Cannot divide #{@operand_second} by zero!" if @operand_first == "0"
       result = (@operand_second.to_f).send(@operator.to_sym,@operand_first.to_f)
       @operands.push(result)
     end 
