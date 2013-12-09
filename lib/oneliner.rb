@@ -1,7 +1,7 @@
 module RPN
 # Calculates the RPN value of an expression that matches one-line RPN format.
 # 
-  class Sanitizer
+  class OneLiner
     attr_reader :expression, :operands, :operators
     
     # Sets attributes equal to those of the Calculator instance it was created through.
@@ -10,7 +10,6 @@ module RPN
       @expression = calculator.expression
       @operands = calculator.operands
       @operators = calculator.operators
-      # one_liner
     end
 
     # Calculates RPN value until all ' ' have been eliminated.

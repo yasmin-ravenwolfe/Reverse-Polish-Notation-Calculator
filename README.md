@@ -70,6 +70,8 @@ To run all tests: rspec
 
 This app has four classes: Calculator, CommandLine, Sanitizer, Stack. Each is an abstraction of and performs the duties of the object it is named for. 
 
-1. 
+1. The CommandLine class is responsible for executing the program by creating a new Calculator instance. Data is accepted through "standard in." The run method calls the classify method on the Calculator, passing in user input. The RPN result is returned using "standard out." The program continues to run until user input is 'q' which exits the program. 
+
+2. The Calculator class matches the user input to determine if the expression is an instance of the Sanitizer or Stack classes. Expressions in which the whole line of input is in RPN format and can be evaluated pass the sanitizer? test. A new Sanitizer
 
 

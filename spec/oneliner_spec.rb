@@ -3,16 +3,16 @@ require 'bundler/setup'
 require 'rspec'
 
 require_relative '../lib/calculator'
-require_relative '../lib/sanitizer'
+require_relative '../lib/oneliner'
 
 module RPN 
-  describe Sanitizer do
+  describe OneLiner do
     let(:calculator) {Calculator.new}
-    let(:sanitizer) {Sanitizer.new(calculator)}
+    let(:oneliner) {OneLiner.new(calculator)}
 
 
     before(:each) do
-      Sanitizer.send(:public, *Sanitizer.protected_instance_methods)
+      OneLiner.send(:public, *OneLiner.protected_instance_methods)
     end
 
     describe ".initialize" do
@@ -20,9 +20,9 @@ module RPN
 
         calculator.expression = "1 2 +"
 
-        expect(sanitizer.expression).to eq("1 2 +")
-        expect(sanitizer.operands).to eq([])
-        expect(sanitizer.operators).to eq([])
+        expect(oneliner.expression).to eq("1 2 +")
+        expect(oneliner.operands).to eq([])
+        expect(oneliner.operators).to eq([])
       end
     end
 
@@ -30,7 +30,7 @@ module RPN
       it "returns the RPN calculated value of the expression" do 
         calculator.expression = "1 2 +"
 
-        expect(sanitizer.calculate).to eq("3.0")
+        expect(oneliner.calculate).to eq("3.0")
       end
     end
 
@@ -38,8 +38,8 @@ module RPN
       it "returns the new expression and pushes reult to operands array" do 
         calculator.expression = "1 2 + 4 -"
 
-        expect(sanitizer.result).to eq("3.0 4 -")
-        expect(sanitizer.operands).to eq([3.0])
+        expect(oneliner.result).to eq("3.0 4 -")
+        expect(oneliner.operands).to eq([3.0])
       end
     end
 
@@ -48,7 +48,7 @@ module RPN
 
         calculator.expression = "1 2 +"
         
-        expect(sanitizer.parse).to eq("+")
+        expect(oneliner.parse).to eq("+")
 
       end
     end
