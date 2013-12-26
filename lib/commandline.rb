@@ -1,8 +1,10 @@
 require_relative 'calculator'
+require 'singleton'
 
 module RPN
   class CommandLine
-attr_reader :calculator
+  attr_reader :calculator
+  include Singleton 
     # When a CommandLine instance is created, a new Calculator instance is created.
     # The run method is immediately called.
     # 
