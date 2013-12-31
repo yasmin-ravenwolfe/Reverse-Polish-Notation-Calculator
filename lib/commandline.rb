@@ -8,10 +8,9 @@ module RPN
     # When a CommandLine instance is created, a new Calculator instance is created.
     # The run method is immediately called.
     # 
-    def initialize
-      @calculator = Calculator.new
-      run
-    end
+    # def initialize
+    #   run
+    # end
 
     # Runs program by using user input to do RPN calculations.
     # If user input is 'q', the program exits.
@@ -27,7 +26,7 @@ module RPN
       else
       raise "Error: #{@input} is not a valid RPN expression" if @input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
 
-      $stdout.puts @calculator.classify(@input)
+      $stdout.puts Calculator.instance.classify(@input)
 
       run
       end      

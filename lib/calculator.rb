@@ -1,10 +1,13 @@
 require_relative 'oneliner'
 require_relative 'stack'
+require 'singleton'
+
 
 module RPN
   # Determines whether to calculate user input through the OneLiner or Stack classes.
   # 
   class Calculator
+    include Singleton
     attr_accessor :expression, :operands, :operators, :result
 
     # Sets operands and operators as empty arrays.
