@@ -1,6 +1,7 @@
 module RPN
  
   # Calculates RPN value for multiple lines of user input.
+  # This class only knows about specific calculation behavior for the Stack input type.
   # 
   class Stack
   

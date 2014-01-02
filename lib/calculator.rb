@@ -5,8 +5,10 @@ require 'singleton'
 
 
 module RPN
-  # Determines whether to calculate user input through the OneLiner or Stack classes.
-  # 
+  # Responsible for storing operand and operators for duration of RPN program.
+  # Since there is only one Calculator per opening of the program (because operands and operators need to persist throughout) it is a Singleton class.
+  # This class delegates the classification of input type to Classifyer class and RPN calculation to the class for each specific input type (OneLiner or Stack).
+  # This class only knows about input (pre-classification) and operands/operators storage (things that persist for the whole program usage). It calls, but delegates everything else.
   class Calculator
     include Singleton
     attr_accessor :expression, :operands, :operators

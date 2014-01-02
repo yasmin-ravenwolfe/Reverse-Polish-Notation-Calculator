@@ -1,5 +1,6 @@
 module RPN
 # Calculates the RPN value of an expression that matches one-line RPN format.
+# This class only knows about specific calculation behavior for the OneLiner input type.
 # 
   class OneLiner
     attr_reader :expression, :operands, :operators
