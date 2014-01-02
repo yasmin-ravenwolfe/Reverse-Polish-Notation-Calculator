@@ -44,9 +44,9 @@ module RPN
 
      tokens.each do |token|
         if operand?(token)
-          @operands << token
+          operands << token
         elsif operator?(token)
-          @operators << token
+          operators << token
         else
           "Not a valid calculation"
         end
@@ -83,15 +83,15 @@ module RPN
     end
 
     def division
-      raise "Cannot divide #{@operand_second} by zero!" if @operand_first == "0"
-      result = (@operand_second.to_f).send(@operator.to_sym,@operand_first.to_f)
+      raise "Cannot divide #{@operand_second} by zero!" if operand_first == "0"
+      result = (@operand_second.to_f).send(@operator.to_sym,operand_first.to_f)
       operands.push(result)
     end 
 
     # For subtraction operations.
     # 
     def subtraction?
-      @operator == "-"
+      operator == "-"
     end
 
     def subtraction

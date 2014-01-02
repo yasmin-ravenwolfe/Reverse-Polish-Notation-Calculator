@@ -11,7 +11,8 @@ module RPN
   # This class only knows about input (pre-classification) and operands/operators storage (things that persist for the whole program usage). It calls, but delegates everything else.
   class Calculator
     include Singleton
-    attr_accessor :expression, :operands, :operators
+    attr_reader :expression, :classified_input
+    attr_accessor :operands, :operators
 
     # Sets operands and operators as empty arrays.
     # 
@@ -20,13 +21,23 @@ module RPN
       @operators = []  
     end
 
-    # Calculates RPN value depending on type of input. 
-    # If input passes one_liner? test, a new OneLiner instance is created and result is returned.
-    # If input does not pass one_liner? test, but is valid, a new Stack instance is created and result is returned.
+    # Delegates classification of input and calculation.
     # 
     def evaluate(input)
       @expression = input
-      Classifyer.new.classify.calculate
+      classify_input
+      calculate
+    end
+
+    protected 
+    # Creates a new instance of Classifyer class to determine input type.
+    def classify_input
+      @classified_input = Classifyer.new.classify
+    end
+
+    # Calls calculate on Classifyer instance, which delegates the actual calculation logic to class that corresponds with input type.
+    def calculate
+      @classified_input.calculate
     end
   end
 end
