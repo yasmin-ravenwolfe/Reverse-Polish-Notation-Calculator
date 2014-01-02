@@ -26,7 +26,7 @@ module RPN
     # 
     def evaluate(input)
       @expression = input
-      @classifyer = Classifyer.new(@expression).classify.calculate
+      Classifyer.new.classify.calculate
     end
   end
 end
