@@ -4,7 +4,7 @@ In Reverse Polish notation the operators follow their operands; for instance, to
 
 Example:
 
-The infix expression "5 + ((1 + 2 + 3) * 4) − 3" can be written down like this in RPN:
+The infix expression "5 + ((1 + 2) * 4) − 3" can be written down like this in RPN:
 
 5 1 2 + 4 * + 3 -
 

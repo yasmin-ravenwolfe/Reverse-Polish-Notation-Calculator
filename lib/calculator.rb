@@ -9,7 +9,7 @@ module RPN
   # 
   class Calculator
     include Singleton
-    attr_accessor :expression, :operands, :operators, :result
+    attr_accessor :expression, :operands, :operators
 
     # Sets operands and operators as empty arrays.
     # 
@@ -24,16 +24,7 @@ module RPN
     # 
     def evaluate(input)
       @expression = input
-      Classifyer.new(@expression).classify.calculate
-
+      @classifyer = Classifyer.new(@expression).classify.calculate
     end
-
-    protected
-    # If input matches one_liner?, RPN calculation can be performed on whole line at once.
-    # If it doesn't match, the data needs to be calculated through use of the @operands and @operators arrays.
-    # 
-    # def one_liner?
-    #   true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ @expression 
-    # end 
   end
 end

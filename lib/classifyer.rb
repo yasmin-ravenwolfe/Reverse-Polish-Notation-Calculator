@@ -2,7 +2,7 @@ require_relative 'calculator'
 
 module RPN
   class Classifyer
-    attr_accessor :one_liner, :stack
+    # attr_accessor :one_liner, :stack
     def initialize(input)
       @input = input
     end
@@ -16,7 +16,7 @@ module RPN
     end
 
     def one_liner?
-      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ @expression 
+      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ @input 
     end 
 
 
