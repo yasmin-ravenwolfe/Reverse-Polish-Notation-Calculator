@@ -23,13 +23,13 @@ module RPN
     # 
     def calculate
       add_to_stack
-      if @operators.empty?
-        @operands.last
-      elsif @operands.count >= 2 
+      if operators.empty?
+        operands.last
+      elsif operands.count >= 2 
         normal_calculation
-        @operands.last
+        operands.last
       else
-        @operators.pop
+        operators.pop
         "Not enough operands to perform calculation. (Operands: #{@operands})"
       end
     end
@@ -40,7 +40,7 @@ module RPN
     # Pushes each element into operands or operators array.
     # 
     def add_to_stack
-     tokens = @expression.split(' ')
+     tokens = expression.split(' ')
 
      tokens.each do |token|
         if operand?(token)
@@ -71,21 +71,21 @@ module RPN
     # Sets operand and operator values for RPN calculation.
     # 
     def set_values
-      @operand_first = @operands.pop
-      @operand_second = @operands.pop
-      @operator = @operators.pop
+      @operand_first = operands.pop
+      @operand_second = operands.pop
+      @operator = operators.pop
     end
 
     # For division operations.
     # 
     def division?
-      @operator == "/"
+      operator == "/"
     end
 
     def division
       raise "Cannot divide #{@operand_second} by zero!" if @operand_first == "0"
       result = (@operand_second.to_f).send(@operator.to_sym,@operand_first.to_f)
-      @operands.push(result)
+      operands.push(result)
     end 
 
     # For subtraction operations.
@@ -96,14 +96,14 @@ module RPN
 
     def subtraction
       result = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
-      @operands.push(result * (-1))
+      operands.push(result * (-1))
     end
 
     # For addition and multiplicaton operations.
     # 
     def addition_and_multiplication
       result = (operand_first.to_f).send(operator.to_sym,operand_second.to_f)
-      @operands.push(result)
+      operands.push(result)
     end
 
     # Returns true is token is an operator.
