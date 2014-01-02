@@ -26,7 +26,7 @@ module RPN
       else
       raise "Error: #{@input} is not a valid RPN expression" if @input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
 
-      $stdout.puts Calculator.instance.classify(@input)
+      $stdout.puts Calculator.instance.evaluate(@input)
 
       run
       end      
