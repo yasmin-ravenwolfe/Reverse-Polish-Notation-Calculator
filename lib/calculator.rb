@@ -23,10 +23,12 @@ module RPN
 
     # Delegates classification of input and calculation.
     # 
-    def evaluate(input)
-      @expression = input
-      classify_input
-      calculate
+    def evaluate(classified_type)
+      # @expression = CommandLine.instance.classified_input.input
+      # classify_input
+      CommandLine.instance.classified_input.calculate
+
+      # calculate
     end
 
     private 
@@ -37,7 +39,7 @@ module RPN
 
     # Calls calculate on Classifyer instance, which delegates the actual calculation logic to class that corresponds with input type.
     def calculate
-      @classified_input.calculate
+      CommandLine.instance.classified_input.calculate
     end
   end
 end

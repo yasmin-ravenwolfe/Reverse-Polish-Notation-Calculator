@@ -1,16 +1,18 @@
 require_relative 'calculator'
+require_relative 'classifyer'
 require 'singleton'
 
 module RPN
   class CommandLine
   attr_reader :calculator
+  attr_accessor :classified_input
   include Singleton 
     # When a CommandLine instance is created, a new Calculator instance is created.
     # The run method is immediately called.
     # 
-    # def initialize
-    #   run
-    # end
+    def initialize
+      @classified_input = nil
+    end
 
     # Runs program by using user input to do RPN calculations.
     # If user input is 'q', the program exits.
@@ -18,15 +20,17 @@ module RPN
     # 
     def run
       $stderr.print '> '
-      @input = $stdin.gets.chomp 
+      input = $stdin.gets.chomp 
 
-      if @input == 'q'
+      if input == 'q'
         $stdout.puts "goodbye"
         exit false
       else
-      raise "Error: #{@input} is not a valid RPN expression" if @input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
+      raise "Error: #{@input} is not a valid RPN expression" if input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
 
-      $stdout.puts Calculator.instance.evaluate(@input)
+      @classified_input = Classifyer.new(input).classify
+      $stdout.puts @classified_input.calculate
+      # Calculator.instance.evaluate(@classified_input)
 
       run
       end      

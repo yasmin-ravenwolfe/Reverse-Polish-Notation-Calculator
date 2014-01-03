@@ -1,4 +1,6 @@
 require_relative 'calculator'
+require_relative 'oneliner'
+require_relative 'stack'
 
 # For each type of input, this class will classify the input.
 # After classification, a new instance of the appropriate class will be created.
@@ -9,20 +11,22 @@ require_relative 'calculator'
 # 
 module RPN
   class Classifyer
-    def initialize
+    attr_reader :input
+    def initialize(input)
+      @input = input
     end
 
     def classify
       if one_liner? == true
-        OneLiner.new
+        OneLiner.new(@input)
       else
-        Stack.new
+        Stack.new(@input)
       end
     end
     private
 
     def one_liner?
-      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ Calculator.instance.expression
+      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ @input
     end 
 
 

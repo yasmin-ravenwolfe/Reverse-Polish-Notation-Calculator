@@ -7,8 +7,8 @@ module RPN
     
     # Sets attributes equal to those of the Calculator instance it was created through.
     # 
-    def initialize
-      @expression = Calculator.instance.expression
+    def initialize(input)
+      @expression = input
       @operands = Calculator.instance.operands
       @operators = Calculator.instance.operators
     end
