@@ -23,7 +23,7 @@ module RPN
         calculate
     end
 
-    protected
+    private
 
     # Calculates new result by sending operator as a method on operands.
     # Returns the new expression as a string.

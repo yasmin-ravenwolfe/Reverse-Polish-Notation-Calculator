@@ -29,7 +29,7 @@ module RPN
       calculate
     end
 
-    protected 
+    private 
     # Creates a new instance of Classifyer class to determine input type.
     def classify_input
       @classified_input = Classifyer.new.classify

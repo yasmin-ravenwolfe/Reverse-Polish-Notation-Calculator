@@ -19,6 +19,7 @@ module RPN
         Stack.new
       end
     end
+    private
 
     def one_liner?
       true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ Calculator.instance.expression

@@ -34,7 +34,7 @@ module RPN
       end
     end
 
-    protected
+    private
 
     # Splits expression into an array.
     # Pushes each element into operands or operators array.
