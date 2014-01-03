@@ -3,7 +3,6 @@ require 'singleton'
 
 module RPN
   class CommandLine
-  attr_reader :calculator
   include Singleton 
     # When a CommandLine instance is created, a new Calculator instance is created.
     # The run method is immediately called.
@@ -18,15 +17,15 @@ module RPN
     # 
     def run
       $stderr.print '> '
-      @input = $stdin.gets.chomp 
+      input = $stdin.gets.chomp 
 
-      if @input == 'q'
+      if input == 'q'
         $stdout.puts "goodbye"
         exit false
       else
-      raise "Error: #{@input} is not a valid RPN expression" if @input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
+      raise "Error: #{@input} is not a valid RPN expression" if input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
 
-      $stdout.puts Calculator.instance.evaluate(@input)
+      $stdout.puts Calculator.instance.evaluate(input)
 
       run
       end      

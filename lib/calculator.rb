@@ -11,7 +11,7 @@ module RPN
   # This class only knows about input (pre-classification) and operands/operators storage (things that persist for the whole program usage). It calls, but delegates everything else.
   class Calculator
     include Singleton
-    attr_reader :expression, :classified_input
+    attr_reader :expression
     attr_accessor :operands, :operators
 
     # Sets operands and operators as empty arrays.
