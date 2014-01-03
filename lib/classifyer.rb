@@ -9,11 +9,13 @@ require_relative 'calculator'
 # 
 module RPN
   class Classifyer
-    def initialize
-    end
+    # def initialize
+    #   @input = Calculator.instance.expression
+      
+    # end
 
-    def classify
-      if one_liner? == true
+    def classify(input)
+      if one_liner?(input) == true
         OneLiner.new
       else
         Stack.new
@@ -21,8 +23,8 @@ module RPN
     end
     private
 
-    def one_liner?
-      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ Calculator.instance.expression
+    def one_liner?(input)
+      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ input
     end 
 
 

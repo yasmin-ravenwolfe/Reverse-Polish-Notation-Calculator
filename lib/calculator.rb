@@ -21,23 +21,23 @@ module RPN
       @operators = []  
     end
 
-    # Delegates classification of input and calculation.
-    # 
-    def evaluate(input)
+    # Delegates classification of input to passed in classifyer class.
+    # Delegates calculation to the classifyer's calculate method.
+    def evaluate(classifyer,input)
       @expression = input
-      classify_input
-      calculate
+      clss = classifyer.classify(input) 
+      clss.calculate
     end
 
-    private 
-    # Creates a new instance of Classifyer class to determine input type.
-    def classify_input
-      @classified_input = Classifyer.new.classify
-    end
+  #   private 
+  #   # Creates a new instance of Classifyer class to determine input type.
+  #   def classify_input
+  #     @classified_input = Classifyer.new.classify
+  #   end
 
-    # Calls calculate on Classifyer instance, which delegates the actual calculation logic to class that corresponds with input type.
-    def calculate
-      @classified_input.calculate
-    end
-  end
+  #   # Calls calculate on Classifyer instance, which delegates the actual calculation logic to class that corresponds with input type.
+  #   def calculate
+  #     @clss.calculate
+  #   end
+  # end
 end
