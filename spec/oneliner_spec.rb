@@ -12,7 +12,7 @@ module RPN
 
 
     before(:each) do
-      OneLiner.send(:public, *OneLiner.protected_instance_methods)
+      OneLiner.send(:public, *OneLiner.private_instance_methods)
     end
 
     describe ".initialize" do

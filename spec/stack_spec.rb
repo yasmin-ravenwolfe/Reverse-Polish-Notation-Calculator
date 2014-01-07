@@ -11,7 +11,7 @@ module RPN
     let(:stack) {Stack.new(calculator)}
     
     before(:each) do
-      Stack.send(:public, *Stack.protected_instance_methods)
+      Stack.send(:public, *Stack.private_instance_methods)
     end
 
     describe ".initialize" do 
