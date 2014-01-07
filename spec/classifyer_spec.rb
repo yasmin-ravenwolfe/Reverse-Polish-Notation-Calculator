@@ -27,8 +27,9 @@ module RPN
       context "Classifyer#one_liner is true" do 
       
         it "create a new OneLiner instance" do 
-
-          expect(classifyer.classify("1 2 +")).to(OneLiner.new(calculator))
+          calculator.expression = "1 2 +"
+          
+          expect(classifyer.classify).to be_a(RPN::OneLiner)
 
         end
       end
@@ -36,10 +37,21 @@ module RPN
 
       context "Classifyer#one_liner is false" do 
         it "creates a new Stack instance" do 
+          calculator.expression = "1"
+
+          expect(classifyer.classify).to be_a(RPN::Stack)
         end
       end
     end
 
+    describe "#one_liner" do 
+      it "returns true if expression matches regular expression" do 
+
+        calculator.expression = "1 2 +"
+
+        expect(classifyer.one_liner?).to eq(true)
+      end
+    end
 
   end
 end

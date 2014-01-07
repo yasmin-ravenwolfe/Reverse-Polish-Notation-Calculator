@@ -16,8 +16,8 @@ module RPN
       
     end
 
-    def classify(input)
-      if one_liner?(input) == true
+    def classify
+      if one_liner? == true
         OneLiner.new(calculator)
       else
         Stack.new(calculator)
@@ -25,8 +25,8 @@ module RPN
     end
     private
 
-    def one_liner?(input)
-      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ input
+    def one_liner?
+      true if /(\-*\d+\.*\d*) (\-*\d+\.*\d*) (\+|\-|\*|\/)(?!\d)/ =~ calculator.expression
     end 
 
 
