@@ -1,7 +1,7 @@
 require_relative 'oneliner'
 require_relative 'stack'
 require_relative 'classifyer'
-require 'singleton'
+# require 'singleton'
 
 
 module RPN
@@ -10,9 +10,9 @@ module RPN
   # This class delegates the classification of input type to Classifyer class and RPN calculation to the class for each specific input type (OneLiner or Stack).
   # This class only knows about input (pre-classification) and operands/operators storage (things that persist for the whole program usage). It calls, but delegates everything else.
   class Calculator
-    include Singleton
-    attr_reader :expression
-    attr_accessor :operands, :operators
+    # include Singleton
+    # attr_reader :expression
+    attr_accessor :operands, :operators, :expression
 
     # Sets operands and operators as empty arrays.
     # 
@@ -40,4 +40,5 @@ module RPN
   #     @clss.calculate
   #   end
   # end
+  end
 end

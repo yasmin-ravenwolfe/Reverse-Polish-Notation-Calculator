@@ -1,9 +1,9 @@
 require_relative 'calculator'
-require 'singleton'
+# require 'singleton'
 
 module RPN
   class CommandLine
-  include Singleton 
+  # include Singleton 
     # When a CommandLine instance is created, a new Calculator instance is created.
     # The run method is immediately called.
     attr_reader :calculator
@@ -27,7 +27,7 @@ module RPN
       else
         raise "Error: #{@input} is not a valid RPN expression" if input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
 
-        $stdout.puts calculator.evaluate(Classifyer.new,input)
+        $stdout.puts calculator.evaluate(Classifyer.new(calculator),input)
 
         run
       end      

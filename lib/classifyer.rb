@@ -9,16 +9,18 @@ require_relative 'calculator'
 # 
 module RPN
   class Classifyer
-    # def initialize
-    #   @input = Calculator.instance.expression
+    attr_reader :calculator
+    
+    def initialize(calculator)
+      @calculator = calculator
       
-    # end
+    end
 
     def classify(input)
       if one_liner?(input) == true
-        OneLiner.new
+        OneLiner.new(calculator)
       else
-        Stack.new
+        Stack.new(calculator)
       end
     end
     private
