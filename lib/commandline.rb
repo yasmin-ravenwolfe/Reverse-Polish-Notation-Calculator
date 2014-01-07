@@ -24,11 +24,11 @@ module RPN
         $stdout.puts "goodbye"
         exit false
       else
-      raise "Error: #{@input} is not a valid RPN expression" if input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
+        raise "Error: #{@input} is not a valid RPN expression" if input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
 
-      $stdout.puts Calculator.instance.evaluate(Classifyer.new,input)
+        $stdout.puts Calculator.instance.evaluate(Classifyer.new,input)
 
-      run
+        run
       end      
     end
   end
