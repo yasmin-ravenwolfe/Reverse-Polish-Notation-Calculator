@@ -52,6 +52,5 @@ module RPN
         expect(classifyer.one_liner?).to eq(true)
       end
     end
-
   end
 end
