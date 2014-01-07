@@ -6,10 +6,11 @@ module RPN
   include Singleton 
     # When a CommandLine instance is created, a new Calculator instance is created.
     # The run method is immediately called.
-    # 
-    # def initialize
-    #   run
-    # end
+    attr_reader :calculator
+    def initialize
+      @calculator = Calculator.new
+      run
+    end
 
     # Runs program by using user input to do RPN calculations.
     # If user input is 'q', the program exits.
@@ -26,7 +27,7 @@ module RPN
       else
         raise "Error: #{@input} is not a valid RPN expression" if input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
 
-        $stdout.puts Calculator.instance.evaluate(Classifyer.new,input)
+        $stdout.puts calculator.evaluate(Classifyer.new,input)
 
         run
       end      

@@ -4,6 +4,6 @@ require_relative '../lib/calculator'
 require_relative '../lib/commandline'
 
 
-RPN::CommandLine.instance.run
+RPN::CommandLine.new.run
 
 
