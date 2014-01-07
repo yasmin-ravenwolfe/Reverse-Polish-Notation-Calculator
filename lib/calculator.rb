@@ -25,7 +25,7 @@ module RPN
     # Delegates calculation to the classifyer's calculate method.
     def evaluate(classifyer,input)
       @expression = input
-      clss = classifyer.classify(input) 
+      clss = classifyer.classify 
       clss.calculate
     end
 
@@ -40,4 +40,5 @@ module RPN
   #     @clss.calculate
   #   end
   # end
+  end
 end
