@@ -8,7 +8,6 @@ The infix expression "5 + ((1 + 2) * 4) − 3" can be written down like this in 
 
 5 1 2 + 4 * + 3 -
 
-
 ###Features:
 
 This calculator can handle:

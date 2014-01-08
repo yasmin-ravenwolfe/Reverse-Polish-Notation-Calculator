@@ -18,7 +18,7 @@ module RPN
 
     # Returns RPN calculation result when there are enough operands and operators.
     # Returns last operand when there are no operators.
-    # Returns result when there is an operator and at least two operands.
+    # Returns result when there is an operator and at least two operands. (Don't need && because will only move to elsif if there is an operator)
     # Returns an error when there is an operator but less than two operands.
     # 
     def calculate
