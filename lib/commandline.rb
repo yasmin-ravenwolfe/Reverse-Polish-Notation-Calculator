@@ -13,8 +13,9 @@ module RPN
 
     # Runs program by using user input to do RPN calculations.
     # If user input is 'q', the program exits.
-    # Otherwise, Calculator#classify is called and result output to console.
+    # Otherwise, Calculator#evaluate is called and result output to console.
     # Pass in the class being used to parse input to Calculator#evaluate. Future types of input, ie text files, can now be passed in from command line to specific classifyer/parser class.
+    #   This keeps Calculator from being coupled to Classifyer.
     # 
     def run
       $stderr.print '> '
