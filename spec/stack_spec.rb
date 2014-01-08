@@ -91,6 +91,17 @@ module RPN
           expect(stack.operands.last).to eq(2)
         end
       end
+
+      context "operation is sin" do 
+        it "calculates the sin of the last value in operands" do 
+
+          calculator.expression = "1 2 sin"
+          stack.add_to_stack
+          stack.normal_calculation
+
+          expect(stack.operands.last).to eq(Math::sin(2))
+        end
+      end
     end
 
     describe "#set_values" do 

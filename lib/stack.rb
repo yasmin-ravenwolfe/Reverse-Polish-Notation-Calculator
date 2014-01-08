@@ -63,8 +63,10 @@ module RPN
         division
       elsif subtraction?
         subtraction
-      else 
+      elsif addition_and_multiplication?
       addition_and_multiplication
+      else
+        other_operations
       end
     end
 
@@ -99,6 +101,9 @@ module RPN
       operands.push(result * (-1))
     end
 
+    def addition_and_multiplication?
+      operator == "+" || operator == "*"
+    end
     # For addition and multiplicaton operations.
     # 
     def addition_and_multiplication
@@ -106,10 +111,14 @@ module RPN
       operands.push(result)
     end
 
+    def other_operations
+      result = Math.send(operator.to_sym,operand_first)
+    end
+
     # Returns true is token is an operator.
     # 
     def operator?(token)
-      true if token =~ /\+|\-|\*|\// 
+      true if token =~ /\+|\-|\*|\/|sin/ 
     end
     # Returns true is token is an operand.
     # 
