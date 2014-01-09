@@ -5,7 +5,7 @@ require_relative 'calculator'
 # The input-based class is responsible for knowing how to do a RPN calculation for that specific input type.
 # This class only knows about classifying input types.
 # 
-# This class acts as a Factory class- it is responsible for creating different types of objects.
+# This class acts as a Strategy class- it is responsible for creating different types of objects.
 # 
 module RPN
   class Classifyer
