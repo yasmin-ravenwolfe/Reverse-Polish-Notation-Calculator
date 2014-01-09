@@ -1,3 +1,4 @@
+require 'pry'
 module RPN
  
   # Calculates RPN value for multiple lines of user input.
@@ -25,7 +26,7 @@ module RPN
       add_to_stack
       if operators.empty?
         operands.last
-      elsif operands.count >= 2 
+      elsif operands.count >= 1
         normal_calculation
         operands.last
       else
@@ -112,7 +113,9 @@ module RPN
     end
 
     def other_operations
-      result = Math.send(operator.to_sym,operand_first)
+      # binding.pry
+      result = Math.send(operator.to_sym,operand_first.to_f)
+      operands.push(result)
     end
 
     # Returns true is token is an operator.

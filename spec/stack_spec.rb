@@ -95,7 +95,7 @@ module RPN
       context "operation is sin" do 
         it "calculates the sin of the last value in operands" do 
 
-          calculator.expression = "1 2 sin"
+          calculator.expression = "2 sin"
           stack.add_to_stack
           stack.normal_calculation
 

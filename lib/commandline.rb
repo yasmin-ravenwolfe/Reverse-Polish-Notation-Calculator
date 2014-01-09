@@ -25,7 +25,7 @@ module RPN
         $stdout.puts "goodbye"
         exit false
       else
-        raise "Error: #{@input} is not a valid RPN expression" if input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)]/ 
+        raise "Error: #{@input} is not a valid RPN expression" if input =~ /[^\+|\-|\*|\/|(\-*\d+\.*\d*\s)|sin]/ 
 
         $stdout.puts calculator.evaluate(Classifyer.new(calculator),input)
 
